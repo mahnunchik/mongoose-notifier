@@ -1,6 +1,6 @@
 # mongoose-notifier
 
-[Mongoose](https://github.com/LearnBoost/mongoose) lifecyle notification system through the redis
+[Mongoose](https://github.com/LearnBoost/mongoose) lifecyle notification system through the [Redis](http://redis.io/commands#pubsub)
 
 ## Installation
 
@@ -12,17 +12,70 @@ $ npm install mongoose-notifier
 
 * Notification other processes through publish resis's messages
 
+## Events
+
+* create
+* update
+* delete
+
+
 ## Usage
 
+Apply plugin to schema
 ```
 //user.js
 var User = new Schema({ ... });
 User.plugin(require('mongoose-notifier'));
+
+var user = new User({ ... });
+user.save();
 ```
 
+Listen events in other processes
 ```
 //worker.js
+var client = redis.createClient();
+client.on('message', function(channel, message){
+  var data = JSON.parse(message)
+  switch (data.type) {
+    case 'create':
+      var userID = data._id
+      //send 'Hello' email
+    case 'update':
+      var userID = data._id
+      //do smth
+  }
+});
+
+client.subscribe('mongoose.user')
 ```
+
+## API mongoose-notifier
+
+mongoose lifecyle notification system through the redis
+
+```
+var notifier = require('mongoose-notifier');
+var options = { ... }
+User.plugin(notifier, options);
+```
+
+### Params:
+
+* **Object** *options* 
+
+* **String** *options.channel* Channel name
+
+* **Function** *options.pack* Packer function
+
+* **RedisClient** *options.redisClient* Redis client instance
+
+* **String** *options.port* Redis port
+
+* **String** *options.host* Redis host
+
+* **Object** *options.redisOptions* Redis options
+
 
 ## License
 

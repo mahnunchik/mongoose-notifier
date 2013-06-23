@@ -1,8 +1,9 @@
 
 ###*
  *
- * mongoose-notifier
  * mongoose lifecyle notification system through the redis
+ *
+ * @name mongoose-notifier
  *
  * @param {Schema} schema
  * @param {Object} options
