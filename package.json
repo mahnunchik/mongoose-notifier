@@ -16,9 +16,11 @@
     "mongodb",
     "redis",
     "notification",
-    "lifecyle"
+    "lifecyle",
+    "plugin",
+    "events"
   ],
-  "author": "Eugeny Vlasenko <mahnunchik@gmail.com>",
+  "author": "Eugeny Vlasenko <mahnunchik@gmail.com> (http://about.me/vlasenko)",
   "bugs": {
     "url": "https://github.com/mahnunchik/mongoose-notifier/issues"
   },

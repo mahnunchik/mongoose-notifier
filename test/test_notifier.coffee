@@ -6,7 +6,6 @@ redis = require 'redis'
 notifier = require '../'
 
 dbName = 'mongodb://localhost/test_notifier'
-msgpack = require 'msgpack'
 
 describe 'Mongoose notifier', ()->
   
