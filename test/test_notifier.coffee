@@ -32,7 +32,7 @@ describe 'Mongoose notifier', ()->
 
       client = redis.createClient()
       client.on 'message', (channel, message)->
-        assert.equal channel, 'mongoose.user'
+        assert.equal channel, 'mongoose:user'
         data = JSON.parse message
         assert.equal data.type, 'create'
         assert.equal data._id, '111111111111111111111110'
@@ -40,7 +40,7 @@ describe 'Mongoose notifier', ()->
         db.close (err)->
           done(err)
 
-      client.subscribe 'mongoose.user'
+      client.subscribe 'mongoose:user'
       client.on 'subscribe', ()->
         user.save (err, user)->
           done(err) if err?
@@ -58,14 +58,14 @@ describe 'Mongoose notifier', ()->
 
         client = redis.createClient()
         client.on 'message', (channel, message)->
-          assert.equal channel, 'mongoose.user'
+          assert.equal channel, 'mongoose:user'
           data = JSON.parse message
           assert.equal data.type, 'update'
           assert.equal data._id, '111111111111111111111111'
           client.end()
           db.close (err)->
             done(err)
-        client.subscribe 'mongoose.user'
+        client.subscribe 'mongoose:user'
 
         client.on 'subscribe', ()->
           user.name = 'David'
@@ -85,13 +85,13 @@ describe 'Mongoose notifier', ()->
 
         client = redis.createClient()
         client.on 'message', (channel, message)->
-          assert.equal channel, 'mongoose.user'
+          assert.equal channel, 'mongoose:user'
           data = JSON.parse message
           assert.equal data.type, 'delete'
           assert.equal data._id, '111111111111111111111112'
           client.end()
           done()
-        client.subscribe 'mongoose.user'
+        client.subscribe 'mongoose:user'
 
         client.on 'subscribe', ()->
           user.remove (err)->
@@ -110,7 +110,7 @@ describe 'Mongoose notifier', ()->
 
       client = redis.createClient()
       client.on 'message', (channel, message)->
-        assert.equal channel, 'mychannel.user'
+        assert.equal channel, 'mychannel:user'
         data = JSON.parse message
         assert.equal data.type, 'create'
         assert.equal data._id, '111111111111111111111113'
@@ -118,7 +118,7 @@ describe 'Mongoose notifier', ()->
         db.close (err)->
           done(err)
 
-      client.subscribe 'mychannel.user'
+      client.subscribe 'mychannel:user'
       client.on 'subscribe', ()->
         user.save (err, user)->
           done(err) if err?
@@ -136,14 +136,14 @@ describe 'Mongoose notifier', ()->
 
         client = redis.createClient()
         client.on 'message', (channel, message)->
-          assert.equal channel, 'mychannel.user'
+          assert.equal channel, 'mychannel:user'
           data = JSON.parse message
           assert.equal data.type, 'update'
           assert.equal data._id, '111111111111111111111114'
           client.end()
           db.close (err)->
             done(err)
-        client.subscribe 'mychannel.user'
+        client.subscribe 'mychannel:user'
 
         client.on 'subscribe', ()->
           user.name = 'David'
@@ -163,13 +163,13 @@ describe 'Mongoose notifier', ()->
 
         client = redis.createClient()
         client.on 'message', (channel, message)->
-          assert.equal channel, 'mychannel.user'
+          assert.equal channel, 'mychannel:user'
           data = JSON.parse message
           assert.equal data.type, 'delete'
           assert.equal data._id, '111111111111111111111115'
           client.end()
           done()
-        client.subscribe 'mychannel.user'
+        client.subscribe 'mychannel:user'
 
         client.on 'subscribe', ()->
           user.remove (err)->

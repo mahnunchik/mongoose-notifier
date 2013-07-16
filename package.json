@@ -1,6 +1,6 @@
 {
   "name": "mongoose-notifier",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Mongoose lifecyle notification system through the redis",
   "main": "lib/notifier.js",
   "scripts": {

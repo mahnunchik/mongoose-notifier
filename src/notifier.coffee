@@ -29,13 +29,13 @@ module.exports = (schema, options={})->
     next()
 
   schema.post 'save', ()->
-    channel = "#{channelPrefix}.#{@constructor.modelName}"
+    channel = "#{channelPrefix}:#{@constructor.modelName}"
     if @_isNew
       client.publish channel, pack({type: 'create', _id: @id})
     else
       client.publish channel, pack({type: 'update', _id: @id})
 
   schema.post 'remove', ()->
-    channel = "#{channelPrefix}.#{@constructor.modelName}"
+    channel = "#{channelPrefix}:#{@constructor.modelName}"
     client.publish channel, pack({type: 'delete', _id: @id})
     
