@@ -1,5 +1,7 @@
 # mongoose-notifier
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mahnunchik/mongoose-notifier.svg)](https://greenkeeper.io/)
+
 [Mongoose](https://github.com/LearnBoost/mongoose) lifecyle notification system through the [Redis](http://redis.io/commands#pubsub)
 
 ## Installation
